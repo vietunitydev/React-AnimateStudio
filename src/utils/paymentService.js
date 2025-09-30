@@ -40,16 +40,36 @@ class PaymentService {
         }
     }
 
-    async getOrders(apiKey) {
-        try{
+    async getOrders(apiKey, params = {}) {
+        try {
             const headers = createAuthHeaders(apiKey);
-            const response = await get('/payments/orders',headers);
-            console.log(response);
+            const query = new URLSearchParams();
+            if (params.page) query.append('page', params.page.toString());
+            if (params.limit) query.append('limit', params.limit.toString());
+            if (params.search) query.append('search', params.search);
+            if (params.sortBy) query.append('sortBy', params.sortBy);
+            if (params.sortOrder) query.append('sortOrder', params.sortOrder);
+
+            const response = await get(`/payments/orders?${query.toString()}`, headers);
             return response;
-        }
-        catch(error){
+        } catch (error) {
             console.error('Error fetching projects:', error);
             throw new Error(`Failed to fetch projects: ${error.message}`);
+        }
+    }
+
+    async getPaymentStats(apiKey, params = {}) {
+        try {
+            const headers = createAuthHeaders(apiKey);
+            const query = new URLSearchParams();
+            if (params.fromDate) query.append('fromDate', params.fromDate);
+            if (params.toDate) query.append('toDate', params.toDate);
+
+            const response = await get(`/payments/stats?${query.toString()}`, headers);
+            return response;
+        } catch (error) {
+            console.error('Error fetching payment stats:', error);
+            throw new Error(`Failed to fetch stats: ${error.message}`);
         }
     }
 }
