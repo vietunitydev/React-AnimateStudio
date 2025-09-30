@@ -1,7 +1,7 @@
 // utils/api.js
 
 // API Base URL - thay đổi theo server của bạn
-const API_BASE_URL = 'http://localhost:4999/api';
+const API_BASE_URL = import.meta.env.API_BASE_URL;
 
 /**
  * Generic API call function
