@@ -26,7 +26,7 @@ const Admin: React.FC = () => {
                             Admin Key:
                         </label>
                         <input
-                            type="password"
+                            // type="password"
                             value={inputAdminKey}
                             onChange={(e) => setInputAdminKey(e.target.value)}
                             placeholder="Nhập admin key để thực hiện các thao tác"
