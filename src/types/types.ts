@@ -1,5 +1,5 @@
 export interface ProjectData {
-    id: string;
+    id?: string;
     title?: string;
     texts: string[];
     imageUrls: string[];
