@@ -39,6 +39,19 @@ class PaymentService {
             throw new Error(`Failed to fetch projects: ${error.message}`);
         }
     }
+
+    async getOrders(apiKey) {
+        try{
+            const headers = createAuthHeaders(apiKey);
+            const response = await get('/payments/orders',headers);
+            console.log(response);
+            return response;
+        }
+        catch(error){
+            console.error('Error fetching projects:', error);
+            throw new Error(`Failed to fetch projects: ${error.message}`);
+        }
+    }
 }
 
 const paymentService = new PaymentService();

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { OrderData } from "@/types/types.ts";
+import paymentService from "@/utils/paymentService";
 
 interface Props {
     adminKey: string;
@@ -15,12 +16,8 @@ const OrderManagement: React.FC<Props> = ({ adminKey }) => {
     const fetchOrders = async () => {
         setLoading(true);
         try {
-            // TODO: Implement API call
-            // const response = await fetch('/api/orders');
-            // const orderList = await response.json();
-            // setOrders(orderList);
-            // Mock data for testing
-            setOrders([]);
+            const response = await paymentService.getOrders(adminKey)
+            setOrders(response.orders);
         } catch (error) {
             console.error('Error fetching orders:', error);
             alert('Failed to load orders.');
@@ -123,7 +120,7 @@ const OrderManagement: React.FC<Props> = ({ adminKey }) => {
                             <th className="border border-gray-300 px-4 py-3 text-left font-semibold">Transaction No</th>
                             <th className="border border-gray-300 px-4 py-3 text-left font-semibold">Response Code</th>
                             <th className="border border-gray-300 px-4 py-3 text-left font-semibold">Paid At</th>
-                            <th className="border border-gray-300 px-4 py-3 text-center font-semibold">Actions</th>
+                            {/*<th className="border border-gray-300 px-4 py-3 text-center font-semibold">Actions</th>*/}
                         </tr>
                         </thead>
                         <tbody>
@@ -141,10 +138,9 @@ const OrderManagement: React.FC<Props> = ({ adminKey }) => {
                                     {order.amount.toLocaleString()} VND
                                 </td>
                                 <td className="border border-gray-300 px-4 py-3">
-                                    <select
-                                        value={order.status}
+                                    <span
                                         // onChange={(e) => handleUpdateStatus(order.orderId, e.target.value)}
-                                        disabled={!adminKey.trim()}
+                                        // disabled={!adminKey.trim()}
                                         className={`px-2 py-1 rounded text-sm font-semibold disabled:cursor-not-allowed ${
                                             order.status === 'success' || order.status === 'paid'
                                                 ? 'bg-green-100 text-green-800'
@@ -155,12 +151,13 @@ const OrderManagement: React.FC<Props> = ({ adminKey }) => {
                                                         : 'bg-gray-100 text-gray-800'
                                         }`}
                                     >
-                                        <option value="pending">pending</option>
-                                        <option value="paid">paid</option>
-                                        <option value="success">success</option>
-                                        <option value="failed">failed</option>
-                                        <option value="cancelled">cancelled</option>
-                                    </select>
+                                        {order.status}
+                                        {/*<option value="pending">pending</option>*/}
+                                        {/*<option value="paid">paid</option>*/}
+                                        {/*<option value="success">success</option>*/}
+                                        {/*<option value="failed">failed</option>*/}
+                                        {/*<option value="cancelled">cancelled</option>*/}
+                                    </span>
                                 </td>
                                 <td className="border border-gray-300 px-4 py-3 font-mono text-sm">
                                     {order.vnp_TransactionNo || '-'}
@@ -179,15 +176,15 @@ const OrderManagement: React.FC<Props> = ({ adminKey }) => {
                                 <td className="border border-gray-300 px-4 py-3 text-sm">
                                     {order.paidAt ? new Date(order.paidAt).toLocaleString() : '-'}
                                 </td>
-                                <td className="border border-gray-300 px-4 py-3 text-center">
-                                    <button
-                                        // onClick={() => handleDelete(order.orderId)}
-                                        disabled={!adminKey.trim()}
-                                        className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm disabled:cursor-not-allowed disabled:bg-red-300 transition-colors"
-                                    >
-                                        Delete
-                                    </button>
-                                </td>
+                                {/*<td className="border border-gray-300 px-4 py-3 text-center">*/}
+                                {/*    <button*/}
+                                {/*        // onClick={() => handleDelete(order.orderId)}*/}
+                                {/*        disabled={!adminKey.trim()}*/}
+                                {/*        className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm disabled:cursor-not-allowed disabled:bg-red-300 transition-colors"*/}
+                                {/*    >*/}
+                                {/*        Delete*/}
+                                {/*    </button>*/}
+                                {/*</td>*/}
                             </tr>
                         ))}
                         </tbody>
