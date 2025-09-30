@@ -37,3 +37,23 @@ export interface KeyStatus {
     uses: number;
     message: string;
 }
+
+export interface KeyData {
+    id: string;
+    code: string;
+    usesLeft: number;
+    plan: string;
+    orderId: string;
+    amount: number;
+    status: string;
+}
+
+export interface OrderData {
+    orderId: string
+    plan: string
+    amount: number
+    status: string
+    vnp_TransactionNo: string
+    vnp_ResponseCode: string
+    paidAt: Date,
+}

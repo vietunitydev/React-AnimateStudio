@@ -1,99 +1,63 @@
-import React, { useEffect, useState } from 'react';
-import { ProjectData } from "@/types/types.ts";
+import React, { useState } from 'react';
+import ProjectManagement from './ProjectManagement';
+import KeyManagement from './KeyManagement';
+import OrderManagement from './OrderManagement';
 
-interface Project extends ProjectData {
-    id: string;
-    createdAt: string;
-}
+type TabType = 'projects' | 'keys' | 'orders';
 
 const Admin: React.FC = () => {
-    const [projects, setProjects] = useState<Project[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [activeTab, setActiveTab] = useState<TabType>('projects');
     const [inputAdminKey, setInputAdminKey] = useState('');
 
-    const fetchProjects = async () => {
-        setLoading(true);
-        try {
-
-            // setProjects(projectList);
-        } catch (error) {
-            console.error('Error fetching projects:', error);
-            alert('Failed to load projects.');
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const handleDelete = async (id: string) => {
-        if (!inputAdminKey.trim()) {
-            alert('Please enter the admin key to delete a project.');
-            return;
-        }
-
-
-
-        if (window.confirm('Are you sure you want to delete this project?')) {
-            try {
-                // await
-
-                alert('Project deleted successfully.');
-            } catch (error) {
-                console.error('Error deleting project:', error);
-                alert('Failed to delete project.');
-            }
-        }
-    };
-
-    useEffect(() => {
-        fetchProjects();
-    }, []);
+    const tabs = [
+        { id: 'projects' as TabType, label: 'Quản lý Projects', icon: '📁' },
+        { id: 'keys' as TabType, label: 'Quản lý Keys', icon: '🔑' },
+        { id: 'orders' as TabType, label: 'Quản lý Orders', icon: '🛒' }
+    ];
 
     return (
-        <div className="p-8 max-w-4xl mx-auto">
-            <h1 className="text-3xl font-bold mb-6 text-gray-800">Admin Panel</h1>
-            <div className="mb-6">
-                <label className="block text-gray-700 mb-1 font-medium">Admin Key:</label>
-                <input
-                    type="password"
-                    placeholder="Enter admin key"
-                    value={inputAdminKey}
-                    onChange={(e) => setInputAdminKey(e.target.value)}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-            </div>
-            <p className="mb-4">Total Projects: {projects.length}</p>
-            {loading ? (
-                <p>Loading projects...</p>
-            ) : projects.length === 0 ? (
-                <p>No projects found.</p>
-            ) : (
-                <div className="space-y-4">
-                    {projects.map(project => (
-                        <div key={project.id} className="p-4 border rounded-lg flex justify-between items-center">
-                            <div>
-                                <h2 className="text-lg font-semibold">{project.title || 'Untitled'}</h2>
-                                <p className="text-sm text-gray-600">Created: {new Date(project.createdAt).toLocaleDateString()}</p>
-                                <p className="text-sm text-gray-600">Theme: {project.theme}</p>
-                            </div>
-                            <div className="flex space-x-2">
-                                <a
-                                    href={`/project/${project.id}`}
-                                    className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg transition-colors"
-                                >
-                                    View
-                                </a>
-                                <button
-                                    onClick={() => handleDelete(project.id)}
-                                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg transition-colors disabled:opacity-50"
-                                    disabled={!inputAdminKey.trim()}
-                                >
-                                    Delete
-                                </button>
-                            </div>
-                        </div>
-                    ))}
+        <div className="min-h-screen bg-gray-50 py-8 px-4">
+            <div className="max-w-7xl mx-auto">
+                <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+                    <h1 className="text-3xl font-bold text-gray-800 mb-6">Admin Panel</h1>
+
+                    <div className="mb-6">
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                            Admin Key:
+                        </label>
+                        <input
+                            type="password"
+                            value={inputAdminKey}
+                            onChange={(e) => setInputAdminKey(e.target.value)}
+                            placeholder="Nhập admin key để thực hiện các thao tác"
+                            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
+                    </div>
+
+                    <div className="flex gap-2 border-b border-gray-200">
+                        {tabs.map(tab => (
+                            <button
+                                key={tab.id}
+                                onClick={() => setActiveTab(tab.id)}
+                                className={`px-6 py-3 font-semibold transition-all ${
+                                    activeTab === tab.id
+                                        ? 'border-b-2 border-blue-500 text-blue-600'
+                                        : 'text-gray-600 hover:text-gray-800'
+                                }`}
+                            >
+                                <span className="mr-2">{tab.icon}</span>
+                                {tab.label}
+                            </button>
+                        ))}
+                    </div>
                 </div>
-            )}
+
+                <div className="bg-white rounded-xl shadow-lg p-6">
+                    {activeTab === 'projects' && <ProjectManagement adminKey={inputAdminKey} />}
+                    {activeTab === 'keys' && <KeyManagement adminKey={inputAdminKey} />}
+                    {activeTab === 'orders' && <OrderManagement adminKey={inputAdminKey} />}
+                </div>
+            </div>
         </div>
     );
 };
