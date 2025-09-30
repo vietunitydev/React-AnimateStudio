@@ -18,6 +18,10 @@ const KeyManagement: React.FC<Props> = ({ adminKey }) => {
     const [sortBy, setSortBy] = useState('createdAt');
     const [sortOrder, setSortOrder] = useState('desc');
 
+    // States for creating new key
+    const [newCode, setNewCode] = useState('');
+    const [newUsesLeft, setNewUsesLeft] = useState(1);
+
     const fetchKeys = async () => {
         setLoading(true);
         try {
@@ -40,6 +44,24 @@ const KeyManagement: React.FC<Props> = ({ adminKey }) => {
         }
     };
 
+    const handleCreate = async () => {
+        if (!newCode.trim() ||  newUsesLeft < 1 ) {
+            alert('Please fill in all fields with valid values.');
+            return;
+        }
+
+        try {
+            await keyService.createKey(adminKey, newCode, newUsesLeft);
+            alert('Key created successfully.');
+            setNewCode('');
+            setNewUsesLeft(1);
+            fetchKeys();
+        } catch (error) {
+            console.error('Error creating key:', error);
+            alert('Failed to create key.');
+        }
+    };
+
     const handleDelete = async (id: string) => {
         if (!adminKey.trim()) {
             alert('Please enter the admin key to delete a key.');
@@ -48,7 +70,7 @@ const KeyManagement: React.FC<Props> = ({ adminKey }) => {
 
         if (window.confirm('Are you sure you want to delete this key?')) {
             try {
-                const response = await keyService.deleteKey(adminKey, id); // Corrected to deleteKey
+                const response = await keyService.deleteKey(adminKey, id);
                 console.log(response);
                 setKeys(keys.filter(k => k.id !== id));
                 alert('Key deleted successfully.');
@@ -62,7 +84,6 @@ const KeyManagement: React.FC<Props> = ({ adminKey }) => {
     const handlePageChange = (newPage: number) => {
         if (newPage >= 1 && newPage <= totalPages) {
             setCurrentPage(newPage);
-            fetchKeys(); // Fetch immediately on page change
         }
     };
 
@@ -73,11 +94,40 @@ const KeyManagement: React.FC<Props> = ({ adminKey }) => {
             setSortBy(newSortBy);
             setSortOrder('desc');
         }
-        // Sorting will apply on next refresh
     };
 
     return (
-        <div>
+        <div className="p-6">
+            {/* Create New Key Section */}
+            <div className="mb-8">
+                <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                    Tạo Key Mới
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+                    <input
+                        type="text"
+                        placeholder="Nhập code"
+                        value={newCode}
+                        onChange={(e) => setNewCode(e.target.value)}
+                        className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    <input
+                        type="number"
+                        placeholder="Nhập usesLeft"
+                        value={newUsesLeft}
+                        onChange={(e) => setNewUsesLeft(parseInt(e.target.value) || 1)}
+                        min={1}
+                        className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    <button
+                        onClick={handleCreate}
+                        className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors"
+                    >
+                        ➕ Create Key
+                    </button>
+                </div>
+            </div>
+
             <div className="mb-6 flex items-center justify-between">
                 <h2 className="text-2xl font-bold text-gray-800">
                     Quản lý Keys ({totalKeys})

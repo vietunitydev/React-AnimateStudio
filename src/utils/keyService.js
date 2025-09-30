@@ -23,7 +23,7 @@ class KeyService {
         try {
 
             const headers = createAuthHeaders(apiKey);
-            const response = await post('/projects', {code:code, usesLeft:usesLeft}, headers);
+            const response = await post('/keys', {code:code, usesLeft:usesLeft}, headers);
             return response;
         } catch (error) {
             console.error('Error creating project:', error);
@@ -34,7 +34,7 @@ class KeyService {
     async deleteKey(apiKey, keyId) {
         try {
             const headers = createAuthHeaders(apiKey);
-            const response = await del(`/projects/${keyId}`, headers);
+            const response = await del(`/keys/${keyId}`, headers);
             return response;
         } catch (error) {
             console.error('Error deleting project:', error);
