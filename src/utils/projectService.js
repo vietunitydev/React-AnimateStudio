@@ -21,15 +21,18 @@ class ProjectService {
             throw new Error(`Failed to fetch projects: ${error.message}`);
         }
     }
-    /**
-     * Get all projects
-     * @param {string} apiKey - User API key
-     * @returns {Promise} - Projects data with remaining uses info
-     */
-    async getProjects(apiKey) {
+
+    async getProjects(apiKey, params = {}) {
         try {
             const headers = createAuthHeaders(apiKey);
-            const response = await get('/projects', headers);
+            const query = new URLSearchParams();
+            if (params.page) query.append('page', params.page.toString());
+            if (params.limit) query.append('limit', params.limit.toString());
+            if (params.search) query.append('search', params.search);
+            if (params.sortBy) query.append('sortBy', params.sortBy);
+            if (params.sortOrder) query.append('sortOrder', params.sortOrder);
+
+            const response = await get(`/projects?${query.toString()}`, headers);
             return response;
         } catch (error) {
             console.error('Error fetching projects:', error);
