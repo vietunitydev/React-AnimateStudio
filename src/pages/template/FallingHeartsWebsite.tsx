@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import projectService from '../utils/projectService';
-import { FallingItem, ProjectData } from "@/types/types.ts";
+import {FallingItem, ProjectData} from "@/types/types.ts";
 
 const MAX_ITEMS = 50;
 const POOL_SIZE = 100;
@@ -175,7 +174,7 @@ const FallingHeartsWebsite: React.FC = () => {
                 } else {
                     setError('Project data not found in response.');
                 }
-            } catch (err: any) {
+            } catch (err : any) {
                 console.error('Error fetching project:', err);
                 let errorMessage = 'Failed to load project data.';
 
@@ -220,7 +219,7 @@ const FallingHeartsWebsite: React.FC = () => {
 
     const createFallingItem = useCallback((): FallingItem => {
         const rand = Math.random();
-        let type: 'heart' | 'text' | 'image' = rand < 0.73 ? 'text' : rand < 0.86 ? 'heart' : 'image';
+        const type: 'heart' | 'text' | 'image' = rand < 0.73 ? 'text' : rand < 0.86 ? 'heart' : 'image';
 
         let content = '';
         if (type === 'heart') {
