@@ -8,6 +8,7 @@ import FallingHeartsWebsite from './pages/FallingHeartsWebsite';
 import Template from "@/pages/Template.tsx";
 import BuyKey from "@/pages/BuyKey.tsx";
 import VNPReturnPage from "@/pages/VNPReturnPage.tsx";
+import Login from "@/pages/Login.tsx";
 
 
 
@@ -22,6 +23,7 @@ const App: React.FC = () => {
                 <Route path="/preview" element={<Preview />} />
                 <Route path="/project/:id" element={<FallingHeartsWebsite />} />
                 <Route path="/vnpreturn" element={<VNPReturnPage />} />
+                <Route path="/login" element={<Login />} />
                 {/*<Route path="/admin" element= {<Admin />} />*/}
                 <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

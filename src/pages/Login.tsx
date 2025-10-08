@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Login: React.FC = () => {
     const handleGoogleLogin = () => {
         // Redirect to backend Google OAuth endpoint
-        window.location.href = 'http://localhost:4999/api/auth/google';
+        window.location.href = `${import.meta.env.VITE_API_BASE_URL}/auth/google`;
     };
 
     return (
@@ -19,7 +19,7 @@ const Login: React.FC = () => {
                 <nav className="bg-white/80 backdrop-blur-md shadow-md p-4 flex justify-between items-center">
                     <div className="flex items-center space-x-3">
                         <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                            AnimateStudio
+                            MagicWishes
                         </span>
                     </div>
                     <div className="flex space-x-4">
@@ -36,12 +36,12 @@ const Login: React.FC = () => {
                     <div className="bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl p-8 md:p-12 max-w-md w-full transform hover:scale-105 transition-transform duration-300">
                         {/* Logo/Icon */}
                         <div className="text-center mb-6">
-                            <div className="text-6xl mb-4">✨</div>
-                            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
-                                Chào mừng trở lại!
-                            </h1>
+                            {/*<div className="text-6xl mb-4">✨</div>*/}
+                            {/*<h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">*/}
+                            {/*    Chào mừng trở lại!*/}
+                            {/*</h1>*/}
                             <p className="text-gray-600">
-                                Đăng nhập để tiếp tục sử dụng AnimateStudio
+                                Đăng nhập để tiếp tục sử dụng MagicWishes
                             </p>
                         </div>
 
@@ -65,7 +65,7 @@ const Login: React.FC = () => {
                         {/* Divider */}
                         <div className="flex items-center my-6">
                             <div className="flex-grow border-t border-gray-300"></div>
-                            <span className="px-4 text-gray-500 text-sm">hoặc</span>
+                            {/*<span className="px-4 text-gray-500 text-sm">hoặc</span>*/}
                             <div className="flex-grow border-t border-gray-300"></div>
                         </div>
 
@@ -75,22 +75,6 @@ const Login: React.FC = () => {
                             <span className="text-blue-600 hover:underline cursor-pointer">Điều khoản dịch vụ</span> và{' '}
                             <span className="text-blue-600 hover:underline cursor-pointer">Chính sách bảo mật</span>
                         </p>
-
-                        {/* Features */}
-                        <div className="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-gray-200">
-                            <div className="text-center">
-                                <div className="text-2xl mb-2">🔒</div>
-                                <div className="text-xs text-gray-600">Bảo mật</div>
-                            </div>
-                            <div className="text-center">
-                                <div className="text-2xl mb-2">⚡</div>
-                                <div className="text-xs text-gray-600">Nhanh chóng</div>
-                            </div>
-                            <div className="text-center">
-                                <div className="text-2xl mb-2">🎨</div>
-                                <div className="text-xs text-gray-600">Sáng tạo</div>
-                            </div>
-                        </div>
                     </div>
 
                     {/* Additional info */}

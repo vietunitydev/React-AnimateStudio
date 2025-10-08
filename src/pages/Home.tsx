@@ -19,7 +19,7 @@ const Home: React.FC = () => {
                         {/*    className="h-10"*/}
                         {/*/>*/}
                         <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                            AnimateStudio
+                            MagicWishes
                         </span>
                     </div>
                     <div className="flex space-x-4">
@@ -44,12 +44,12 @@ const Home: React.FC = () => {
                 <div className="flex flex-col items-center justify-center flex-grow px-4">
                     <h1 className="text-5xl md:text-6xl font-bold text-center mb-4">
                         <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                            Chào mừng đến với Website của AnimateStudio
+                            Chào mừng đến với website của MagicWishes
                         </span>
                     </h1>
-                    <p className="text-xl text-gray-600 text-center max-w-2xl">
-                        Tạo nên những website animation tuyệt đẹp một cách dễ dàng. Hãy bắt đầu ngay hôm nay!
-                    </p>
+                    {/*<p className="text-xl text-gray-600 text-center max-w-2xl">*/}
+                    {/*    Tạo nên những website animation tuyệt đẹp một cách dễ dàng. Hãy bắt đầu ngay hôm nay!*/}
+                    {/*</p>*/}
                 </div>
             </div>
         </div>
