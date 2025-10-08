@@ -21,19 +21,25 @@ export interface FallingItem {
     targetY: number;
 }
 
-export interface VNPayParams {
-    vnp_TxnRef?: string;
-    vnp_Amount?: string;
-    vnp_ResponseCode?: string;
-    vnp_TransactionStatus?: string;
-    vnp_BankCode?: string;
-    vnp_PayDate?: string;
-    [key: string]: string | undefined;
+export interface SelectOption {
+    label: string
+    value: string | number
 }
 
-export interface KeyStatus {
-    status: string;
-    key: string;
-    uses: number;
-    message: string;
+export interface User {
+    id: string
+    email: string
+    name: string
+    avatar?: string
+    role: 'admin' | 'user'
+    createdAt?: string
+    updatedAt?: string
 }
+
+export interface AuthState {
+    user: User | null
+    token: string | null
+    isAuthenticated: boolean
+    isLoading: boolean
+}
+

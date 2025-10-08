@@ -1,4 +1,4 @@
-import { ProjectData } from "@/types/types.ts";
+import { ProjectData } from "@/types/common.types.ts";
 
 export const sampleProjects: ProjectData[] = [
     {
