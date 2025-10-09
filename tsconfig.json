@@ -28,6 +28,6 @@
     }
   },
   "include": ["src"],
-  "files": ["src/type.d.ts", "src/types/*.types.ts"],
+  "files": ["src/type.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
