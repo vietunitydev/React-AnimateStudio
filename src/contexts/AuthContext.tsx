@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     // Check auth on mount
     useEffect(() => {
-        // checkAuth()
+        checkAuth()
     }, [])
 
     const value: AuthContextType = {

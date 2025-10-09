@@ -11,6 +11,7 @@ class ApiService {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials: true,
         })
 
         this.setupInterceptors()
@@ -18,18 +19,18 @@ class ApiService {
 
     private setupInterceptors() {
         // Request Interceptor
-        this.api.interceptors.request.use(
-            (config) => {
-                const token = localStorage.getItem('token')
-                if (token) {
-                    config.headers.Authorization = `Bearer ${token}`
-                }
-                return config
-            },
-            (error) => {
-                return Promise.reject(error)
-            }
-        )
+        // this.api.interceptors.request.use(
+        //     (config) => {
+        //         const token = localStorage.getItem('token')
+        //         if (token) {
+        //             config.headers.Authorization = `Bearer ${token}`
+        //         }
+        //         return config
+        //     },
+        //     (error) => {
+        //         return Promise.reject(error)
+        //     }
+        // )
 
         // Response Interceptor
         this.api.interceptors.response.use(
@@ -42,10 +43,11 @@ class ApiService {
             },
             (error) => {
                 // Handle 401 Unauthorized
-                if (error.response?.status === 401) {
-                    localStorage.removeItem('token')
-                    window.location.href = '/auth/login'
-                }
+                // if (error.response?.status === 401) {
+                //     localStorage.removeItem('token')
+                //     window.location.href = '/auth/login'
+                // }
+                // console.log("error", error)
                 return Promise.reject(this.handleError(error))
             }
         )
