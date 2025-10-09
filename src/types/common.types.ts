@@ -1,3 +1,5 @@
+import {User} from "@/types/user.types.ts";
+
 export interface ProjectData {
     id?: string;
     title?: string;
@@ -21,25 +23,11 @@ export interface FallingItem {
     targetY: number;
 }
 
-export interface SelectOption {
-    label: string
-    value: string | number
-}
-
-export interface User {
-    id: string
-    email: string
-    name: string
-    avatar?: string
-    role: 'admin' | 'user'
-    createdAt?: string
-    updatedAt?: string
-}
-
-export interface AuthState {
+export interface AuthContextType {
     user: User | null
-    token: string | null
-    isAuthenticated: boolean
     isLoading: boolean
+    isAuthenticated: boolean
+    loginWithGoogle: () => void
+    logout: () => void
+    checkAuth: () => Promise<void>
 }
-

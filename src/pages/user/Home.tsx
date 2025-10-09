@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const Home: React.FC = () => {
     return (
@@ -9,48 +8,27 @@ const Home: React.FC = () => {
             <div className="absolute top-40 right-10 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse" style={{animationDelay: '2s'}}></div>
             <div className="absolute -bottom-8 left-1/2 w-72 h-72 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse" style={{animationDelay: '4s'}}></div>
 
-            {/* Content wrapper with higher z-index */}
-            <div className="relative z-10 flex flex-col flex-grow">
-                <nav className="bg-white/80 backdrop-blur-md shadow-md p-4 flex justify-between items-center">
-                    <div className="flex items-center space-x-3">
-                        {/*<img*/}
-                        {/*    src="https://via.placeholder.com/150x50?text=Logo"*/}
-                        {/*    alt="Logo"*/}
-                        {/*    className="h-10"*/}
-                        {/*/>*/}
-                        <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                            MagicWishes
-                        </span>
-                    </div>
-                    <div className="flex space-x-4">
-                        <Link to="/create-project">
-                            <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
-                                Tạo website của bạn
-                            </button>
-                        </Link>
-                        <Link to="/template">
-                            <button className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg transition-colors">
-                                Xem mẫu
-                            </button>
-                        </Link>
-                        <Link to="/buykey">
-                            <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors">
-                                Mua Key
-                            </button>
-                        </Link>
-                    </div>
-                </nav>
+            <div className="flex flex-col items-center justify-center flex-grow px-4">
+                {/* Main Title with highlight */}
+                <h1 className="text-4xl md:text-6xl font-bold text-center mb-4 leading-tight">
+                    <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                        Tạo website lời chúc
+                    </span>
+                    <br />
+                    <span className="bg-yellow-400 text-yellow-800 px-2 py-1 rounded inline-block">
+                        siêu nhanh đẹp
+                    </span>
+                </h1>
 
-                <div className="flex flex-col items-center justify-center flex-grow px-4">
-                    <h1 className="text-5xl md:text-6xl font-bold text-center mb-4">
-                        <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                            Chào mừng đến với website của MagicWishes
-                        </span>
-                    </h1>
-                    {/*<p className="text-xl text-gray-600 text-center max-w-2xl">*/}
-                    {/*    Tạo nên những website animation tuyệt đẹp một cách dễ dàng. Hãy bắt đầu ngay hôm nay!*/}
-                    {/*</p>*/}
-                </div>
+                {/* Subtitle */}
+                <p className="text-xl md:text-xl text-gray-600 text-center max-w-2xl mb-8 leading-relaxed">
+                    Tiết kiệm chi phí - Không cần lập trình
+                </p>
+
+                {/* CTA Button */}
+                <a href="/login" className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold text-lg rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                    Sử dụng miễn phí →
+                </a>
             </div>
         </div>
     );
