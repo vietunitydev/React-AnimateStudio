@@ -16,9 +16,12 @@ const HomeLayout: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
                     <div className="flex justify-between items-center h-16">
                         {/* Logo */}
                         <div className="flex-shrink-0 flex items-center">
-                            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                                MagicWishes
-                            </h1>
+                            <button
+                            onClick={() => window.location.href = '/'}>
+                                <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                    MagicWishes
+                                </h1>
+                            </button>
                         </div>
 
                         {/* Desktop Navigation */}
